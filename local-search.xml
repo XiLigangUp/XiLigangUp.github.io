@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Hexo博客搭建</title>
+    <link href="/2022/02/22/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/"/>
+    <url>/2022/02/22/Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
+    
+    <content type="html"><![CDATA[<p>1.安装git</p><p>2.安装node.js</p><figure class="highlight cmake"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><pre><code class="hljs cmake">yum <span class="hljs-keyword">install</span> nodejs<br><br>yum <span class="hljs-keyword">install</span> npm<br></code></pre></td></tr></table></figure><p>查看安装版本</p><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs crmsh"><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span><br><br>npm -v<br></code></pre></td></tr></table></figure><p>3.安装hexo</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">npm install -g hexo-<span class="hljs-keyword">cli</span><br><br>hexo -v<br></code></pre></td></tr></table></figure><p>初始化hexo</p><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">hexo init xlg<span class="hljs-emphasis">_hexo</span><br><span class="hljs-emphasis">cd xlg_</span>hexo<br>npm install<br></code></pre></td></tr></table></figure><p>新建完成后，指定文件夹目录下有：</p><ul><li>node_modules: 依赖包</li><li>public：存放生成的页面</li><li>scaffolds：生成文章的一些模板</li><li>source：用来存放你的文章</li><li>themes：主题</li><li>** _config.yml: 博客的配置文件**</li></ul><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs awk">hexo g<br><br>hexo server<span class="hljs-regexp">//</span>默认在<span class="hljs-number">4000</span>端口启动<br><br>hexo s -p <span class="hljs-number">80</span><span class="hljs-regexp">//</span>用<span class="hljs-number">80</span>端口启动<br></code></pre></td></tr></table></figure><p>问题：</p><p><img src="C:\Users\86157\AppData\Roaming\Typora\typora-user-images\image-20220221111156134.png" alt="image-20220221111156134"></p><p>node版本太低</p><p>升级node</p><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs excel">npm install -g <span class="hljs-built_in">n</span><br><br><span class="hljs-built_in">n</span> stable<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>hexo</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>hexo搭建</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Nginx做静态资源服务器</title>
+    <link href="/2022/02/22/Nginx%E4%BD%9C%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <url>/2022/02/22/Nginx%E4%BD%9C%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Nginx作静态资源服务器"><a href="#Nginx作静态资源服务器" class="headerlink" title="Nginx作静态资源服务器"></a>Nginx作静态资源服务器</h1><h2 id="静态资源准备"><a href="#静态资源准备" class="headerlink" title="静态资源准备"></a>静态资源准备</h2><p>假设现在有一个静态资源文件夹blog，将文件夹blog放在nginx安装目录中的<strong>sbin同级</strong>目录下</p><h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>修改<strong>conf</strong>目录中的nginx.conf文件</p><figure class="highlight nginx"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-section">location</span> /&#123;<br>    <span class="hljs-attribute">alias</span> blog/;<br>    <span class="hljs-attribute">index</span> index.html;<br>    <span class="hljs-attribute">autoindex</span> <span class="hljs-literal">on</span>;<br>    <span class="hljs-attribute">charset</span> utf-<span class="hljs-number">8</span>;<br>&#125;<br></code></pre></td></tr></table></figure><p>说明：</p><p><code>alias</code>与<code>root</code>作用相同，都是用来指定资源跟路径</p><p><code>index</code> 设置默认的<strong>访问首页</strong></p><p>charset utf-8 解决中文乱码</p><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs autohotkey">autoindex` 选项为`on`时可以让用户浏览对应目录下所有的资源内容，如果浏览时想要**下载**，在`http`段加上`default_type application/octet-stream<span class="hljs-comment">;` 如果想要**查看内容**，加上`default_type text/plain;</span><br></code></pre></td></tr></table></figure><h2 id="Nginx命令"><a href="#Nginx命令" class="headerlink" title="Nginx命令"></a>Nginx命令</h2><p>启动：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> usr/local/nginx/sbin<br>./nginx<br></code></pre></td></tr></table></figure><p>重启：</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk">kill -HUP 主进程号或进程号文件路径<br>或者使用<br>cd <span class="hljs-regexp">/usr/</span>local<span class="hljs-regexp">/nginx/</span>sbin<br>./nginx -s reload<br></code></pre></td></tr></table></figure><p>停止：</p><p>查询nginx主进程号</p><p>　　ps -ef | grep nginx</p><p>　　从容停止  kill -QUIT 主进程号</p><p>　　快速停止  kill -TERM 主进程号</p><p>　　强制停止  kill -9 nginx</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>nginx</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>nginx搭建</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>git操作手册</title>
+    <link href="/2022/02/22/git%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/"/>
+    <url>/2022/02/22/git%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C/</url>
+    
+    <content type="html"><![CDATA[<h1 id="git操作手册"><a href="#git操作手册" class="headerlink" title="git操作手册"></a>git操作手册</h1><p>版本控制、版本迭代</p><h2 id="一、卸载"><a href="#一、卸载" class="headerlink" title="一、卸载"></a>一、卸载</h2><p>反安装，寻找git环境变量删除，然后卸载</p><h2 id="二、问题"><a href="#二、问题" class="headerlink" title="二、问题"></a>二、问题</h2><h3 id="1-右键没有git命令"><a href="#1-右键没有git命令" class="headerlink" title="1.右键没有git命令"></a>1.右键没有git命令</h3><p>解决：Win+R，输入：regedit</p><p>寻找路径：</p><figure class="highlight mathematica"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-type">HKEY_CLASSES</span><span class="hljs-type">_ROOT</span>\<span class="hljs-built_in">Directory</span>\<span class="hljs-built_in">Background</span>\<span class="hljs-variable">shell</span><br></code></pre></td></tr></table></figure><p>在其下新建\Git Bush Here\Command项</p><p>右键点击修改默认值：</p><figure class="highlight moonscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs moonscript"><span class="hljs-name">E</span>:\programme\Git\bin\bash.exe<br></code></pre></td></tr></table></figure><h3 id="2-git-powershell乱码"><a href="#2-git-powershell乱码" class="headerlink" title="2.git powershell乱码"></a>2.git powershell乱码</h3><p>解决：在git的安装路径下找到etc里的bash.bashrc，文件末尾添加</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-built_in">export</span> <span class="hljs-attribute">LANG</span>=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span><br><br><span class="hljs-built_in">export</span> <span class="hljs-attribute">LC_ALL</span>=<span class="hljs-string">&quot;zh_CN.UTF-8&quot;</span><br></code></pre></td></tr></table></figure><h2 id="三、Git环境配置"><a href="#三、Git环境配置" class="headerlink" title="三、Git环境配置"></a>三、Git环境配置</h2><p>1.查看配置</p><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arduino">git config -l<br></code></pre></td></tr></table></figure><p>2.查看系统配置</p><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">git</span> <span class="hljs-comment">config</span> --<span class="hljs-comment">system</span> --<span class="hljs-comment">list</span><br></code></pre></td></tr></table></figure><p>3.查看本地配置</p><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">git</span> <span class="hljs-comment">config</span> --<span class="hljs-comment">global</span> --<span class="hljs-comment">list</span><br></code></pre></td></tr></table></figure><p>4.设置用户名</p><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nsis">git config --global <span class="hljs-literal">user</span>.<span class="hljs-keyword">name</span> <span class="hljs-string">&quot;用户名&quot;</span><br></code></pre></td></tr></table></figure><p>5.设置邮箱</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">git config <span class="hljs-attr">--global</span> user<span class="hljs-selector-class">.email</span> <span class="hljs-string">&quot;邮箱&quot;</span><br></code></pre></td></tr></table></figure><h2 id="四、操作命令"><a href="#四、操作命令" class="headerlink" title="四、操作命令"></a>四、操作命令</h2><p>1.在工作目录添加或修改文件</p><p>2.将需要进行版本管理的文件放入暂存区</p><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">git <span class="hljs-built_in">add</span> .<br></code></pre></td></tr></table></figure><p>3.将暂存区的文件提交到git仓库</p><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">git</span> commit -m   “提交信息说明”         -m表示提交信息<br></code></pre></td></tr></table></figure><p>4.将文件推送到远程仓库</p><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs arcade">git <span class="hljs-built_in">push</span><br></code></pre></td></tr></table></figure><p>可以检查远程设置是否正确，是否具有适当的权限。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">git ls-remote origin<br></code></pre></td></tr></table></figure><p>如果你把你的“起源”叫做“起源”的话。如果遇到错误，可能没有正确设置安全性，例如将公钥上传到GitHub。如果设置正确，将得到远程引用的列表。现在</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">git fetch origin<br></code></pre></td></tr></table></figure><p>将工作，除非任何其他问题，如拔出网络电缆。</p><p>一旦完成，就可以得到上面列出的命令中列出的任意分支。</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">git checkout some-branch<br></code></pre></td></tr></table></figure><p>这将创建一个与远程分支同名的本地分支，并将其签出。</p><p>将新建的分支与远程分支关联</p><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">git <span class="hljs-keyword">push</span> --<span class="hljs-keyword">set</span>-upstream origin dev-outcomeEvaluation<br></code></pre></td></tr></table></figure><p>查看所有文件状态</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git status</span><br></code></pre></td></tr></table></figure><p>查看本地所有分支</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git branch</span> <br></code></pre></td></tr></table></figure><p>查看所有远程分支</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git branch -r</span><br></code></pre></td></tr></table></figure><p>新建一个分支，但仍停留在当前分支</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">git <span class="hljs-keyword">branch </span>分支名<br></code></pre></td></tr></table></figure><p>合并指定分支到当前分支</p><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cos">git <span class="hljs-keyword">merge</span> 分支名<br></code></pre></td></tr></table></figure><p>切换分支</p><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git checkout dev-outcomeEvaluation</span><br></code></pre></td></tr></table></figure><p>删除本地分支</p><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm">git <span class="hljs-keyword">branch </span>-d 分支名<br></code></pre></td></tr></table></figure><p>删除远程分支</p><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">git <span class="hljs-built_in">push</span> <span class="hljs-built_in">origin</span> --<span class="hljs-built_in">delete</span> 分支名<br></code></pre></td></tr></table></figure><p>创建本地仓库两种方式：</p><p>1.git init</p><p>2.git clone</p><p>忽略文件</p><p>.gitignore文件</p><p>设置本地SSH免密登录提交</p><p>进入.ssh目录</p><p>生成公钥</p><p>ssh-keygen -t rsa</p><h1 id="linux-Git"><a href="#linux-Git" class="headerlink" title="linux Git"></a>linux Git</h1><p>安装</p><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">yun <span class="hljs-keyword">install</span> git<br></code></pre></td></tr></table></figure><p>查看版本</p><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">git <span class="hljs-comment">--version</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>git</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>git手册</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>linux端口开放</title>
+    <link href="/2022/02/22/linux%E7%AB%AF%E5%8F%A3%E5%BC%80%E6%94%BE/"/>
+    <url>/2022/02/22/linux%E7%AB%AF%E5%8F%A3%E5%BC%80%E6%94%BE/</url>
+    
+    <content type="html"><![CDATA[<p>1.查看对外开放的端口</p><figure class="highlight ebnf"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">netstat -anp</span><br></code></pre></td></tr></table></figure><p>（1）查看对外开放的端口状态<br>         查询已开放的端口 netstat  -ntulp | grep 端口号：可以具体查看某一个端口号<br>         查询指定端口是否已开 firewall-cmd –query-port&#x3D;666&#x2F;tcp<br>           提示 yes，表示开启；no表示未开启。</p><p>（2）查看防火墙状态<br>         查看防火墙状态 systemctl status firewalld<br>         开启防火墙 systemctl start firewalld<br>         关闭防火墙 systemctl stop firewalld<br>         开启防火墙 service firewalld start<br>         若遇到无法开启<br>         先用：systemctl unmask firewalld.service<br>         然后：systemctl start firewalld.service</p><p>（3）对外开发端口<br>       查看想开的端口是否已开：firewall-cmd –query-port&#x3D;6379&#x2F;tcp<br>       添加指定需要开放的端口：firewall-cmd –add-port&#x3D;123&#x2F;tcp –permanent<br>       重载入添加的端口：firewall-cmd –reload<br>       查询指定端口是否开启成功：firewall-cmd –query-port&#x3D;123&#x2F;tcp</p><div class="code-wrapper"><pre><code class="hljs">   移除指定端口：firewall-cmd --permanent --remove-port=123/tcp</code></pre></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>linux端口</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
